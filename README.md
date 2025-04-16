@@ -1,4 +1,6 @@
 📝 Todo List App
+
+
 A simple and elegant Todo List application built with HTML, CSS, and JavaScript. This app allows users to add, edit, delete, and mark tasks as completed — with modals for user-friendly interaction and localStorage to keep data persistent across sessions.
 
 🚀 
