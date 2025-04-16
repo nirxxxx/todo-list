@@ -1,0 +1,395 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --body-color: #F5F7FA;
+    --bg-color: #FFFFFF;
+    --primary-color: #3AAFF2;
+    --secondary-color: #FF6B6B;
+    --secondary-color-hover: #eb5757;
+    --secondary-color-active: #ee7c7c;
+    --text-color: #2E2E2E;
+    --text-color-secondary: #6C757D;
+    --completed-tast-bg: #D3F9D8;
+    --btn-hover: #1E90FF;
+    --btn-active: hsl(197, 100%, 60%);
+    --border-color: #E0E0E0;
+
+    --bg-modal: #7c7e8070;
+    --close-hover: #7c7e8070;
+    --close-active: #bec2c770;
+}
+
+.theme[data-theme="dark"]{
+    --body-color: #1E1E2F;
+    --bg-color:  #2C2C3E;
+    --text-color: #EAEAEA;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--body-color);
+    line-height: 1.5;
+}
+h1, h3, p, li, label, button {
+    -webkit-tap-highlight-color: transparent;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation; /* Optimize for tap */
+  }
+
+/* h1:active, h3:active, button:active, label:active, svg:active, p:active {
+    background: transparent !important;
+} */
+
+.container {
+    padding: 20px;
+    border-radius: 20px;
+    width: min(90%, 550px);
+    height: 90vh;
+}
+
+h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+}
+
+form {
+    display: flex;
+    position: relative;
+}
+
+#todo-input {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    width: 100%;
+    padding: 10px 20px;
+    border: solid 2px var(--border-color);
+    border-radius: 20px;
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+#todo-input:focus {
+    outline: none;
+}
+
+#addBtn {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--body-color);
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+#addBtn:hover {
+    background-color: var(--btn-hover);
+}
+#addBtn:active {
+    background-color: var(--btn-active);
+}
+
+.wrapper {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    max-height: 60vh;
+    border-bottom: solid 2px var(--border-color);
+    margin-top: 1rem;
+    padding: 20px 0;
+}
+::-webkit-scrollbar {
+    width: 8px;              /* vertical scrollbar */
+    height: 8px;             /* horizontal scrollbar */
+  }
+::-webkit-scrollbar-track {
+    background-color: var(--border-color);  /* Primary color */
+    border-radius: 10px;
+    
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--text-color-secondary);
+    border-radius: 10px;
+    border: none;  /* Space around thumb */
+  }
+
+
+#todo-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin-top: 1rem;
+    gap: 10px;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    width: 100%;    
+    padding: 0 20px;
+    border: solid 2px var(--border-color);
+    border-radius: 5px;
+    background-color: var(--body-color);
+    transition: all .3s ease;
+}
+
+.todo-text {
+    padding: 10px 20px;
+    flex-grow: 1;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+.custom-checkbox {
+    width: clamp(20px, 2vw, 25px);
+    height: clamp(20px, 2vw, 25px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px var(--primary-color);
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    flex-shrink: 0;
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox {
+    background-color: var(--primary-color);
+}
+input[type="checkbox"]:checked ~ .custom-checkbox svg {
+    fill: var(--bg-color);
+}
+input[type="checkbox"]:checked ~ .todo-text {
+    text-decoration: line-through;
+    color: var(--text-color-secondary);
+}
+.todo:has(input[type="checkbox"]:checked) {
+    background-color: var(--completed-tast-bg);
+}
+
+.todo input {
+    display: none;
+}
+.custom-checkbox, .todo-text {
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.editBtn, .deleteBtn {
+    width: clamp(20px, 2vw, 25px);
+    height: clamp(20px, 2vw, 25px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all .3s ease;
+}
+.editBtn:hover, .deleteBtn:hover {
+    background-color: var(--close-hover);
+}
+.editBtn:active, .deleteBtn:active {
+    background-color: var(--close-active);
+}
+
+
+/* popup edit modal */
+.editModal, .deleteAlert, .inputAlert{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-modal);
+}
+.editModal.active, .deleteAlert.active, .inputAlert.active {
+    display: flex;
+}
+
+.inputAlert p {
+    text-align: center;
+}
+
+#okay {
+    font-size: 1rem;
+    color: var(--body-color);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    background-color: var(--primary-color);
+    cursor: pointer;
+    transition: all .3s ease;
+}
+#okay:hover {
+    background-color: var(--btn-hover);
+}
+#okay:active {
+    background-color: var(--btn-active);
+}
+
+
+.card {
+    background-color: var(--body-color);
+    width: min(90%, 400px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    position: relative;
+    transform: .3s;
+    opacity: 0;
+    animation: popUp .4s ease forwards;
+}
+.card h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 2rem;
+}
+.card input {
+    font-size: 1rem;
+    width: 100%;
+    background-color: var(--body-color);
+    border-radius: 35px;
+    border: 2px solid var(--border-color);
+    padding: 10px 20px;
+}
+.card input:focus {
+    outline: none;
+}
+
+.card .btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+.btns button {
+    border: none;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-weight: 800;
+    transform: .3s;
+}
+#cancelBtn {
+    background-color: transparent;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#cancelBtn:hover {
+    background-color: var(--close-hover);
+}
+#cancelBtn:active {
+    background-color: var(--close-active);
+}
+#cancelBtn svg {
+    fill: var(--text-color);
+}
+
+#updateBtn {
+    border-radius: 20px;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
+#updateBtn:hover {
+    background-color: var(--btn-hover);
+}
+#updateBtn:active {
+    background-color: var(--btn-active);
+}
+
+.deleteAlert .btns button {
+    width: 50%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    color: var(--body-color);
+    transform: all .3s;
+}
+#cancelDelete {
+    background-color: var(--primary-color);
+}
+#confirmDelete {
+    background-color: var(--secondary-color);
+}
+#cancelDelete:hover {
+    background-color: var(--btn-hover);
+}
+#confirmDelete:hover {
+    background-color: var(--secondary-color-hover);
+}
+#cancelDelete:active {
+    background-color: var(--btn-active);
+}
+#confirmDelete:active {
+    background-color: var(--secondary-color-active);
+}
+
+
+@media (max-width: 500px) {
+    form {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #addBtn {
+        position: unset;
+        width: 100%;
+        height: auto;
+        padding: 10px 20px;
+    }
+}
+
+
+@keyframes popUp {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    } 50% {
+        opacity: .8;
+        transform: scale(1.09);
+    } 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* @keyframes slideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+} */
+
+
