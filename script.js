@@ -34,7 +34,13 @@ function setupEventListeners() {
     
     // Search listener with debounce
     searchInput.addEventListener('input', handleSearch);
-    
+
+    todoInput.addEventListener('click', () => {
+        searchInput.value = "";
+        handleSearch()
+        select.selectedIndex = 0;
+        handleSortChange()
+    })
     // Form submission
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -93,22 +99,19 @@ function handleSortChange(e) {
     const selectedOption = e.target.value;
     let sortedTodos = [...defaultSort];
     
-    switch(selectedOption) {
-        case 'by-date':
-            // already in original order
-            break;
-        case 'a-z':
-            sortedTodos.sort((a, b) => a.text.localeCompare(b.text));
-            break;
-        case 'z-a':
-            sortedTodos.sort((a, b) => b.text.localeCompare(a.text));
-            break;
-        case 'completed':
-            sortedTodos = sortedTodos.filter(todo => todo.completed);
-            break;
-        case 'pending':
-            sortedTodos = sortedTodos.filter(todo => !todo.completed);
-            break;
+    if (selectedOption == 'by-date'){
+        sortedTodos = [...defaultSort];
+        selectedOption = 'by-date';
+    } else if (selectedOption == 'a-z') {
+        sortedTodos.sort((a, b) => a.text.localeCompare(b.text));
+    } else if (selectedOption == 'z-a') {
+        sortedTodos.sort((a, b) => b.text.localeCompare(a.text));
+    } else if (selectedOption == 'completed') {
+        sortedTodos = sortedTodos.filter(todo => todo.completed);
+    } else if (selectedOption == 'pending') {
+        sortedTodos = sortedTodos.filter(todo => !todo.completed);
+    } else {
+        sortedTodos = [...defaultSort];
     }
     
     allTodos = sortedTodos;
