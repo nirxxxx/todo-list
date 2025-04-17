@@ -56,14 +56,15 @@ h1, h3, p, li, label, button {
     padding: 10px 20px 20px 20px;
     border-radius: 20px;
     width: min(100%, 550px);
-    height: 90vh;
-    border: solid 1px black;
+    height: 100vh;
+    border: solid 1px  black;
 }
 
 h1 {
     font-size: clamp(2rem, 10vw, 3rem);
     font-weight: 800;
     text-align: center;
+    padding: 1rem;
     color: var(--primary-color);
 }
 p {
@@ -431,9 +432,6 @@ input[type="checkbox"]:checked ~ .todo-text {
 
 
 @media (max-width: 500px) {
-    .container {
-        height: 100vh;
-    }
     .input-add-container {
         flex-direction: column;
         gap: 10px;
