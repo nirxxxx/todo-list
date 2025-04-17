@@ -137,11 +137,10 @@ form {
 .wrapper {
     overflow-y: scroll;
     scroll-behavior: smooth;
-    max-height: 60vh;
-    border-bottom: solid 2px var(--border-color);
+    border: 2px solid var(--border-color);
+    max-height: 55vh;
     margin-top: 1rem;
     padding-bottom: 20px;
-    border: 2px solid var(--border-color);
     border-radius: 5px;
 }
 ::-webkit-scrollbar {
