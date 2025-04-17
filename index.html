@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Todo List App, this app allows users to add, edit, delete, and mark tasks as completed.">
+        <meta name="description" content="A clean, simple todo list application to organize your daily tasks. Add, edit, and manage todos with ease.">
         <meta name="keywords" content="Todo List, Jhorin Aton, web development, HTML, CSS, JavaScript">
         <meta name="author" content="Jhorin Aton">
         <link rel="icon" type="image/png" href="https://assets.vercel.com/image/upload/front/favicon/vercel/favicon.ico" />
@@ -15,9 +15,28 @@
 <body>
     <div class="container">
         <h1>Todo list</h1>
+        <p>Free online todo list manager to organize your daily tasks. Features include adding todos, marking as complete, editing, and deleting tasks.</p>
+        <div class="seo-text">
+            <p>Free online todo list manager to organize your daily tasks. Features include adding todos, marking as complete, editing, and deleting tasks.</p>
+            <h2>How to use this todo app</h2>
+            <p>Simply type your task and press enter to add it to your list...</p>
+        </div>
         <form>
-            <input type="text" id="todo-input" placeholder="Enter your task" autocomplete="off">
-            <button id="addBtn">ADD</button>
+            <div class="input-add-container">
+                <input type="text" id="todo-input" placeholder="Enter your task" autocomplete="off">
+                <button id="addBtn">ADD</button>
+            </div>
+            <div class="sort">
+                <input type="text" id="search">
+                <select name="sortBy" id="sortBy">
+                    <option value="by-date">Default (by date)</option>
+                    <option value="a-z">a-z</option>
+                    <option value="z-a">z-a</option>
+                    <option value="completed">completed</option>
+                    <option value="pending">pending</option>
+                    <!-- <option value="a-z"></option> -->
+                </select>
+            </div>
         </form>
 
         <div class="wrapper">
